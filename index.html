@@ -1,0 +1,306 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+
+        <!-- CSS INIT -->
+        <!--
+        <link rel="stylesheet" type="text/css" href="Keyboard.css" />
+        -->
+
+        <!-- CSS INTERNAL STYLING (INSIDE HTML) -->
+        <style>
+        /*
+        A typical breakpoint for a mobile screen is 480px width.
+        */
+        
+        /*
+        @media screen and (max-width: 480px) {
+            
+        }
+        */
+        
+        button {
+            border-color:grey;
+        }
+        /*
+        button {
+            display:inline-block;
+            background-color:whitesmoke ;
+            padding: 5px;
+            border:black solid 1px;
+            border-radius: 4px;
+            font-size: 1.5vw;
+            font-family:Verdana, Geneva, Tahoma, sans-serif
+        }
+        */
+        div {
+            
+            padding: 1px 5px;
+            border: black solid 1px;
+            border-radius: 5px ;
+        }
+        
+        footer{
+            position:static;
+            bottom:0;
+        }
+        
+        html{
+            min-height:100%;
+        }
+        
+        .KEY {
+            width:1em;
+            height:1em;
+            text-align:center;
+            text-align-last:center;
+            vertical-align:middle;
+        }
+        
+        .Shadowkey{    
+            background-Color: lightgray;
+            display:inline-block;
+            justify-content: center;
+            width: 50%;
+        }
+        
+        .Shadowrow{
+            background-Color: darkgray;
+            border-top-color: darkgray;
+            border-bottom-color: darkgray;
+            display:flex;
+            /*justify-content: center;*/
+        }
+        
+        span {
+            /*margin: 5px;*/
+            display:inline-block;
+            background-color:whitesmoke ;
+            padding: 5px;
+            border:black solid 1px;
+            border-radius: 4px;
+            font-size: 1.5vw;
+            font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+        }
+        </style>
+    </head>
+
+    <header>
+        <textarea style="width:98%; height:200px;">
+        Asterisk symbol next to the version number means:
+        
+        *   = small addition changes
+        **  = mid version increment   (0.+1.0)
+        *** = major version increment (+1.0.0)
+        no asterisk means just small tweaks/adjustements.
+        
+        Changelog:
+
+        v0.0.6 April 3 2023
+        -added start and function keys in bottom row.
+        -resizing various keys toward the ideal keyboard layout.
+        -changed font family..
+
+        *v0.0.5 April 2 2023
+        -adding initial arrow keys and symbols for the keyboard layout.
+        -first tests and implementation of addEventListener combined with change of background color (finally!)
+        -adding some text description on mouse hover on keys (i.e. keycode number)
+        
+        v0.0.4 March 22 2023
+        -changing css display properties to adjust the keyboard layout.
+        -first implementation of layout scaling with the screen/window size.
+        -added "KEY" class to all span "buttons". This is to apply js behavior at a later point.
+        
+        v0.0.3 March 20 2023
+        -changed key color from lightgray to whitesmoke
+        -added "Shadowrow" class to the lower layer of keys and applied backgroundColor to darkgray.
+
+        v0.0.2 March 19 2023
+        General tweaks, additions and experiments
+        -Added more span rows and keys to complete the keyboard (\123.. esc,F1F2F3..).
+        -removed margin from css and changed padding (2px vertical, 5px horizontal for now)
+        -added class ("Shadowkey" for now) and moved some background color for shadow of keys to css file
+        
+        v0.0.1 March 18 2023 
+        Initial build. First buttons made with span (possibly to replace later with div or sections)
+        -Experiment with background color behavior when clicking / pressing on keys (buggy)
+        </textarea>
+    </header>
+
+    <body>
+        <div style="width:98%;">
+            <!-- KEYS SETUP -->        
+            <div class="Shadowrow">
+                <div id="ESC" class="Shadowkey">
+                    <span class="KEY" title="Escape">ESC</span>
+                    <span class="KEY" title="F1">F1</span>
+                    <span class="KEY" title="F2">F2</span>
+                    <span class="KEY" title="F3">F3</span>
+                    <span class="KEY" title="F4">F4</span>
+                    <span class="KEY" title="F5">F5</span>
+                    <span class="KEY" title="F6">F6</span>
+                    <span class="KEY" title="F7">F7</span>
+                    <span class="KEY" title="F8">F8</span>
+                    <span class="KEY" title="F9">F9</span>
+                    <span class="KEY" title="F10">F10</span>
+                    <span class="KEY" title="F11">F11</span>
+                    <span class="KEY" title="F12">F12</span>
+                </div>
+            </div>
+            
+            <!-- \1234567890'ì-->
+            <div class="Shadowrow">
+                <div id="\12" class="Shadowkey">
+                    <span class="KEY" title="\">\<br>|</span>
+                    <span class="KEY" title="1">1</span>
+                    <span class="KEY" title="2">2</span>
+                    <span class="KEY" title="3">3</span>
+                    <span class="KEY" title="4">4</span>
+                    <span class="KEY" title="5">5</span>
+                    <span class="KEY" title="6">6</span>
+                    <span class="KEY" title="7">7</span>
+                    <span class="KEY" title="8">8</span>
+                    <span class="KEY" title="9">9</span>
+                    <span class="KEY" title="0">0</span>
+                    <span class="KEY" title="'">'</span>
+                    <span class="KEY" title="ì">ì</span>
+                    <span class="KEY" title="Backspace" style="width:2em">BACKSPACE</span>
+                </div>
+            </div>
+            
+            <!-- QWERTYUIOP -->
+            <div class="Shadowrow" onmouseover>
+                <div id="QWE" class="Shadowkey">
+                    <span class="KEY" title="Tab" style="width:1.8em">TAB</span>                
+                    <span class="KEY" id="Q" title="Q">Q</span>
+                    <span class="KEY" title="W">W</span>
+                    <span class="KEY" title="E">E</span>
+                    <span class="KEY" title="R">R</span>
+                    <span class="KEY" title="T">T</span>
+                    <span class="KEY" title="Y">Y</span>
+                    <span class="KEY" title="U">U</span>
+                    <span class="KEY" title="I">I</span>
+                    <span class="KEY" title="O">O</span>
+                    <span class="KEY" title="P">P</span>
+                    <span class="KEY" title="è">è</span>
+                    <span class="KEY" title="+">+</span>
+                </div> 
+            </div>   
+            
+            <!-- ASDFGHJKL-->
+            <div class="Shadowrow">
+                <div id="ASD" class="Shadowkey">
+                    <span class="KEY" title="Caps Lock" style="width:2em">CAPS LOCK</span>
+                    <span class="KEY" title="A">A</span>
+                    <span class="KEY" title="S">S</span>
+                    <span class="KEY" title="D">D</span>
+                    <span class="KEY" title="F">F</span>
+                    <span class="KEY" title="G">G</span>
+                    <span class="KEY" title="H">H</span>
+                    <span class="KEY" title="J">J</span>
+                    <span class="KEY" title="K">K</span>
+                    <span class="KEY" title="L">L</span>
+                    <span class="KEY" title="ò">ò</span>
+                    <span class="KEY" title="à">à</span>
+                    <span class="KEY" title="ù">ù</span>
+                </div>            
+            </div>
+
+            <!-- ZXCVBNM -->
+            <div class="Shadowrow">
+                <div id="ZXC" class="Shadowkey">
+                    <span class="KEY" title="Left Shift" style="width:1.5em">L SHIFT</span>
+                    <span class="KEY" title="<">&lt</span>
+                    <span class="KEY" title="Z">Z</span>
+                    <span class="KEY" title="X">X</span>
+                    <span class="KEY" title="C">C</span>
+                    <span class="KEY" title="V">V</span>
+                    <span class="KEY" title="B">B</span>
+                    <span class="KEY" title="N">N</span>
+                    <span class="KEY" title="M">M</span>
+                    <span class="KEY" title="Comma">,</span>
+                    <span class="KEY" title="Dot">.</span>
+                    <span class="KEY" title="Minus">-</span>
+                    <span class="KEY" title="Right Shift" style="width:2.5em">R SHIFT</span>
+                </div>
+            </div>
+
+            <!-- CTRL -->
+            <div class="Shadowrow">
+                <div class="Shadowkey">
+                    <span class="KEY" title="Left Control" style="width:1.5em">L CTRL</span>
+                    <span class="KEY" title="Start" style="width:1.5em">⊞</span>
+                    <span class="KEY" title="Left Alt" style="width:1.5em">L ALT</span>
+                    <span class="KEY" title="Spacebar" style="width:12em">SPACEBAR</span>
+                    <span class="KEY" title="Right Alt" style="width:1.5em">R ALT(GR)</span>
+                    <span class="KEY" title="Function" style="width:1.3em">FN</span>
+                    <span class="KEY" title="Right Control" style="width:1.5em">R CTRL</span>
+                </div>
+            </div>            
+        </div>
+        <!-- ARROWS SECTION -->
+        <div class="Shadowrow">
+            <div class="Shadowkey">
+                <span class="KEY"></span>
+                <span class="KEY" title="Arrow Up (KeyCode 24)">↑</span><!-- Keycode 24 -->
+                <span class="KEY"></span>
+            </div>
+            <div class="Shadowkey">
+                <span class="KEY" title="Arrow Left (KeyCode 27)">←</span><!-- Keycode 27 -->
+                <span class="KEY" title="Arrow Down (KeyCode 25)">↓</span><!-- Keycode 25 -->
+                <span class="KEY" title="Arrow Right (KeyCode 26)">→</span><!-- Keycode 26 -->
+            </div>
+        </div>
+        
+        
+    </body>
+    
+    <!-- FOOTER -->
+    <footer>
+        <!-- CENTER CREDITS ETC -->
+        <p align="center">Proto UI Keyboard by 3lackrose</p>
+        
+        <!-- SCRIPT INIT -->
+        <!-- 
+            <script src="Keyboard.js"></script>
+        -->
+        
+        <!-- TEMP JAVASCRIPT SETUP -->
+        <script>
+            document.addEventListener("keydown", keyPressed);
+            document.addEventListener("keyup", keyReleased);
+            document.addEventListener("mouseover", keyMouseOver);
+            document.addEventListener("mouseout", keyMouseOut);
+
+            function keyPressed(){
+                console.log("keyPressed!");
+            }
+            
+            function keyReleased() {
+                console.log("keyReleased!");
+            }
+            
+            function keyMouseOver(){
+                console.log("mouseover!");
+                document.getElementsByClassName("KEY")[1].style.backgroundColor = "red";
+            }
+            
+            function keyMouseOut(){
+                console.log("mouseout!");
+                document.getElementsByClassName("KEY")[1].style.backgroundColor = "green";
+            }
+            /*
+            function helloWorld(){
+                document.getElementsByClassName("KEY").innerHTML;
+                alert("hello!");
+            }
+            */
+        </script>
+    </footer>
+</html>
